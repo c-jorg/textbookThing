@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to PostgreSQL Insert</title>
+</head>
+<body>
+    <h2>CSV to PostgreSQL Insert Statement Generator</h2>
+    <br>
+    <h3>This is very tightly coupled don't hate me</h3>
+    <form action="process.php" method="POST" enctype="multipart/form-data">
+        <label for="csv_file">Upload CSV File:</label>
+        <input type="file" name="csv_file" id="csv_file" required><br><br>
+
+        <!-- <label for="input_headers">CSV Headers (comma-separated, type BLANK to use header names from csv):</label>
+        <input type="text" name="input_headers" id="input_headers" required><br><br>
+
+        <label for="output_headers">SQL Headers (comma-separated, must be identical to csv headers):</label>
+        <input type="text" name="output_headers" id="output_headers" required><br><br>
+
+        <label for="table_name">Table Name:</label>
+        <input type="text" name="table_name" id="table_name" required><br><br>
+        -->
+        <label for="line_skip">which line to start reading (start at 1, 0 is headers and I count that and stuff. Tell me if more stuff is added to the csv file so I can add more inserts)</label>
+        <br>
+        <input type='number' name="line_skip" id='line_skip' required><br><br>
+
+        <input type="submit" value="Generate SQL">
+    </form>
+</body>
+</html>
