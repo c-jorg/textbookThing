@@ -1,12 +1,12 @@
-from . import Base, create_engine, ForeignKey, Column, String, Integer, CHAR, Boolean, Decimal, Date, Relationship, declarative_base, sessionmaker, scoped_session
-
+from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double, Boolean
+from . import Base
 
 class Image(Base):
     __tablename__ = "DimImage"
     
-    imageID = Column("Image_ID", Integer, primary_key=True)
+    imageID = Column("Image_ID", Integer, primary_key=True, autoincrement=True)
     imageName = Column("Image_Name", String, nullable=True)
-    fileSizeKB  = Column("File_Size_KB", Decimal, nullable=True)
+    fileSizeKB  = Column("File_Size_KB", Double, nullable=True)
     pixelWidth = Column("Pixel_Width", Integer, nullable=True)
     pixelHeight = Column("Pixel_Height", Integer, nullable=True)
     bookTitle = Column("Book_Title", String, nullable=True)
@@ -17,8 +17,7 @@ class Image(Base):
     blackWhite  = Column("Black_White", Boolean, nullable=True)
     
     
-    def __init__(self, imageID, imageName, fileSizeKB, pixelWidth, pixelHeight, bookTitle, isbn, ieeeRef, subjectName, diagramName, blackWhite):
-        self.imageID = imageID
+    def __init__(self, imageName, fileSizeKB, pixelWidth, pixelHeight, bookTitle, isbn, ieeeRef, subjectName, diagramName, blackWhite):
         self.imageName = imageName
         self.fileSizeKB = fileSizeKB
         self.pixelWidth = pixelWidth
@@ -29,6 +28,7 @@ class Image(Base):
         self.subjectName = subjectName
         self.diagramType = diagramName
         self.blackWhite = blackWhite
+
         
         
         

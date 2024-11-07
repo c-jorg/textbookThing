@@ -1,10 +1,10 @@
-from . import Base, create_engine, ForeignKey, Column, String, Integer, CHAR, Decimal, Date, Relationship, declarative_base, sessionmaker, scoped_session
-
+from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double
+from . import Base
 
 class Feature(Base):
     __tablename__ = "DimFeatures"
     
-    featureID = Column("Feature_ID", Integer, primary_key=True)
+    featureID = Column("Feature_ID", Integer, primary_key=True, autoincrement=True)
     numberBars = Column("Number_Bars", Integer, nullable=True)
     numberPoints = Column("Number_Points", Integer, nullable=True)
     numberLines = Column("Number_Lines", Integer, nullable=True)
@@ -12,8 +12,7 @@ class Feature(Base):
     axesLimits = Column("Axes_limits", Integer, nullable=True)
     
     
-    def __init__(self, featureID, numberBars, numberPoints, numberLines, numberAtoms, axesLimits):
-        self.featureID = featureID
+    def __init__(self, numberBars, numberPoints, numberLines, numberAtoms, axesLimits):
         self.numberBars = numberBars
         self.numberPoints = numberPoints
         self.numberLines = numberLines

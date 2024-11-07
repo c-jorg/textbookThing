@@ -1,18 +1,23 @@
-from . import Base, create_engine, ForeignKey, Column, String, Integer, CHAR, ByteA, Boolean, Decimal, Date, Relationship, declarative_base, sessionmaker, scoped_session
-from .Date import Date
-from .Feature import Feature
-from .Image import Image
+from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double, LargeBinary, PrimaryKeyConstraint
+from . import Base
 
 class Diagram(Base):
     __tablename__ = "FactDiagram"
     
+    
     imageID = Column(Integer, ForeignKey("DimImage.Image_ID"))
     featureID = Column(Integer, ForeignKey("DimFeatures.Feature_ID"))
     dateID = Column(Integer, ForeignKey("DimDate.Date_ID"))
-    image = Column("Image", ByteA)
-    page = Column("Page", ByteA)
+    image = Column("Image", LargeBinary)
+    page = Column("Page", LargeBinary)
     
-    
+    __table__args__=(
+        PrimaryKeyConstraint(
+            imageID, featureID, dateID
+        ),
+    )
+
+
     def __init__(self, imageID, featureID, dateID, image, page):
         self.imageID = imageID
         self.featureID = featureID

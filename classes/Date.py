@@ -1,15 +1,15 @@
-from . import Base, create_engine, ForeignKey, Column, String, Integer, CHAR, Decimal, Date, Relationship, declarative_base, sessionmaker, scoped_session
-
+from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double
+from . import Base
 
 class Date(Base):
     __tablename__ = "DimDate"
     
-    dateID = Column("Date_ID", Integer, primary_key=True)
+    dateID = Column("Date_ID", Integer, primary_key=True, autoincrement=True)
     date = Column("Date", Date)
     year = Column("Year", Integer)
     
-    def __init__(self, dateID, date, year):
-        self.dateID = dateID
+    def __init__(self, date, year):
+        
         self.date = date
         self.year = year
         
