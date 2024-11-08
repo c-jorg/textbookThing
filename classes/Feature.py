@@ -1,15 +1,15 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double
-from . import Base
+#rom flask_sqlalchemy import Column, String, Integer, ForeignKey, Date, Double
+from . import db
 
-class Feature(Base):
+class Feature(db.Model):
     __tablename__ = "DimFeatures"
     
-    featureID = Column("Feature_ID", Integer, primary_key=True, autoincrement=True)
-    numberBars = Column("Number_Bars", Integer, nullable=True)
-    numberPoints = Column("Number_Points", Integer, nullable=True)
-    numberLines = Column("Number_Lines", Integer, nullable=True)
-    numberAtoms = Column("Number_Atoms", Integer, nullable=True)
-    axesLimits = Column("Axes_limits", Integer, nullable=True)
+    featureID = db.Column("Feature_ID", db.Integer, primary_key=True, autoincrement=True)
+    numberBars = db.Column("Number_Bars", db.Integer, nullable=True)
+    numberPoints = db.Column("Number_Points", db.Integer, nullable=True)
+    numberLines = db.Column("Number_Lines", db.Integer, nullable=True)
+    numberAtoms = db.Column("Number_Atoms", db.Integer, nullable=True)
+    axesLimits = db.Column("Axes_limits", db.Integer, nullable=True)
     
     
     def __init__(self, numberBars, numberPoints, numberLines, numberAtoms, axesLimits):

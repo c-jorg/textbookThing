@@ -67,7 +67,8 @@ class Item(Base):
     
 
 #this makes a databse file call mydb.db
-engine = create_engine("postgresql+psycopg2://postgres:letmein@localhost:3333/ormTest", echo=True)
+engine = create_engine("sqlite:///mydb.db")
+#engine = create_engine("postgresql+psycopg2://postgres:letmein@localhost:3333/ormTest", echo=True)
 Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)

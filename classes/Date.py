@@ -1,12 +1,12 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double
-from . import Base
+#from flask_sqlalchemy import Column, String, Integer, ForeignKey, Date, Double
+from . import db
 
-class Date(Base):
+class Date(db.Model):
     __tablename__ = "DimDate"
     
-    dateID = Column("Date_ID", Integer, primary_key=True, autoincrement=True)
-    date = Column("Date", Date)
-    year = Column("Year", Integer)
+    dateID = db.Column("Date_ID", db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column("Date", db.Date)
+    year = db.Column("Year", db.Integer)
     
     def __init__(self, date, year):
         
