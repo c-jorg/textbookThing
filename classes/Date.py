@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double
+from flask_marshmallow import Marshmallow 
 from . import Base
 
 class Date(Base):
@@ -16,3 +17,8 @@ class Date(Base):
         
     def __repr__(self):
         return f" (Date_ID: {self.dateID}, Date: {self.date}, Year: {self.year}) "
+
+
+class DateSchema(ma.ModelSchema):
+    class Meta:
+        model = Date
