@@ -7,26 +7,26 @@ class Image(db.Model):
     imageID = db.Column("Image_ID", db.Integer, primary_key=True, autoincrement=True)
     imageName = db.Column("Image_Name", db.String, nullable=True)
     fileSizeKB  = db.Column("File_Size_KB", db.Double, nullable=True)
-    pixelWidth = db.Column("Pixel_Width", db.Integer, nullable=True)
-    pixelHeight = db.Column("Pixel_Height", db.Integer, nullable=True)
+    resolution = db.Column("Resolution", db.String, nullable=True)
     bookTitle = db.Column("Book_Title", db.String, nullable=True)
     isbn  = db.Column("ISBN", db.String, nullable=True)
     ieeeRef = db.Column("IEEE_Ref", db.String, nullable=True)
     subjectName = db.Column("Subject_Name", db.String, nullable=True)
     diagramType = db.Column("Diagram_Type", db.String, nullable=True)
+    extension = db.Column("Extenstion", db.String, nullable=True)
     blackWhite  = db.Column("Black_White", db.Boolean, nullable=True)
     
     
-    def __init__(self, imageName, fileSizeKB, pixelWidth, pixelHeight, bookTitle, isbn, ieeeRef, subjectName, diagramName, blackWhite):
+    def __init__(self, imageName, fileSizeKB, resolution, bookTitle, isbn, ieeeRef, subjectName, diagramName, extenstion, blackWhite):
         self.imageName = imageName
         self.fileSizeKB = fileSizeKB
-        self.pixelWidth = pixelWidth
-        self.pixelHeight = pixelHeight
+        self.resolution = resolution
         self.bookTitle = bookTitle
         self.isbn = isbn
         self.ieeeRef = ieeeRef
         self.subjectName = subjectName
         self.diagramType = diagramName
+        self.extension = extension
         self.blackWhite = blackWhite
 
         

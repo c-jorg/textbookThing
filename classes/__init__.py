@@ -12,6 +12,7 @@ from .Date import Date, DateSchema
 from .Diagram import Diagram, DiagramSchema
 from .Feature import Feature, FeatureSchema
 from .Image import Image, ImageSchema
+from .Everything import Everything, EverythingSchema
 
 
 
@@ -23,10 +24,12 @@ __all__ = [
     'Diagram',
     'Feature',
     'Image',
+    'Everything',
     'DateSchema',
     'DiagramSchema',
     'FeatureSchema',
     'ImageSchema',
+    'EverythingSchema',
     'db',
     'app'
 ]

@@ -1,10 +1,21 @@
-#from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double, LargeBinary, PrimaryKeyConstraint
-from . import db, ma
+#from sqlalchemy import = db.Column, String, db.String, ForeignKey, Date, Double
+from . import db, ma, Feature, Image
 
-class Feature(db.Model):
-    __tablename__ = "DimFeature"
+class Everything(db.Model):
+    __tablename__ = "image_metadate"
     
-    featureID = db.Column("Feature_ID", db.Integer, primary_key=True, autoincrement=True)
+    ID = db.Column("ID", db.Integer, primary_key=True, autoincrement=True)
+    #image table
+    Image_name = db.Column("Image_Name", db.String, nullable=True)
+    Resolution = db.Column("Resolution", db.String, nullable=True)
+    Bytes_size = db.Column("Bytes_Size", db.String, nullable=True)
+    IsBW = db.Column("IsBW", db.String, nullable=True)
+    Ext = db.Column("Ext", db.String, nullable=True)
+    Subject = db.Column("Subject", db.String, nullable=True)
+    #fact table
+    Extracted_image = db.Coumn("Extracted_Image", db.LargeBinary, nullable=True)
+    Full_page_image = db.Column("Full_Page_Image", db.LargeBinary, nullable=True)
+    #feature table
     GraphType = db.Column("Graph_Type", db.String, nullable=True)
     NumBars = db.Column("Num_Bars", db.String, nullable=True)
     NumPoints = db.Column("Num_Points", db.String, nullable=True)
@@ -43,9 +54,18 @@ class Feature(db.Model):
     AtomicNumber = db.Column("Atomic_Number", db.String, nullable=True)
     AtomicWeight = db.Column("Atomic_Weight", db.String, nullable=True)
     AtomicGroup = db.Column("Atomic_Group", db.String, nullable=True)
-
-
-    def __init__(self, GraphType, NumBars, NumPoints, NumSlices, CategoryLabel, ProportionLabel, AxisX, AxisY, NumAtoms, CellType, StructureCount, MagnificationLevel, StainType, Organ, Layers, MeasurementUnits, Size, Species, PopulationDensity, Habitat, Sequence, Structure, BasePairs, Molecule, BondType, Angle, FunctionalGroups, Reactants, Products, Temperature, ReactionType, Equipment, LiquidVolume, SafetyLabel, Element, AtomicNumber, AtomicWeight, AtomicGroup, ):
+    
+    
+    def __init__(self, id, Image_name, Resolution, Bytes_size, IsBW, Ext, Extracted_image, Full_page_image, Subject, GraphType, NumBars, NumPoints, NumSlices, CategoryLabel, ProportionLabel, AxisX, AxisY, NumAtoms, CellType, StructureCount, MagnificationLevel, StainType, Organ, Layers, MeasurementUnits, Size, Species, PopulationDensity, Habitat, Sequence, Structure, BasePairs, Molecule, BondType, Angle, FunctionalGroups, Reactants, Products, Temperature, ReactionType, Equipment, LiquidVolume, SafetyLabel, Element, AtomicNumber, AtomicWeight, AtomicGroup):
+        self.id = id
+        self.Image_name = Image_name
+        self.Resolution = Resolution
+        self.Bytes_size = Bytes_size
+        self.IsBW = IsBW
+        self.Ext = Ext
+        self.Extracted_image = Extracted_image
+        self.Full_page_image = Full_page_image
+        self.Subject = Subject
         self.GraphType = GraphType
         self.NumBars = NumBars
         self.NumPoints = NumPoints
@@ -85,12 +105,21 @@ class Feature(db.Model):
         self.AtomicWeight = AtomicWeight
         self.AtomicGroup = AtomicGroup
         
-    
+        
     def __repr__(self):
-        return f" (Image_ID: {self.imageID}, Feature_ID: {self.featureID}, Date_ID: {self.dateID}, Image: [bytearray], Page: [bytearry]) "
+        return f" (Feature_ID: {self.featureID}, Number_Bars: {self.numberBars}, Number_Points: {self.numberPoints}, Number_Lines: {self.numberLines}, Number_Atoms: {self.numberAtoms}, Axes_Limits: {self.axesLimits}) "
 
-class FeatureSchema(ma.SQLAlchemyAutoSchema):
+    def makeImage(self):
+        image = Image(self.Image_name, self.Bytes_size, self.Resolution, None, None, None, self.Subject, None self.Ext, self.IsBW)
+        return image
+
+    def makeFeature(self):
+        feature = Feature(self.GraphType, self.NumBars, self.NumPoints, self.NumSlices, self.CategoryLabel, self.ProportionLabel, self.AxisX, self.AxisY, self.NumAtoms, self.CellType, self.StructureCount, self.MagnificationLevel, self.StainType, self.Organ, self.Layers, self.MeasurementUnits, self.Size, self.Species, self.PopulationDensity, self.Habitat, self.Sequence, self.Structure, self.BasePairs, self.Molecule, self.BondType, self.Angle, self.FunctionalGroups, self.Reactants, self.Products, self.Temperature, self.ReactionType, self.Equipment, self.LiquidVolume, self.SafetyLabel, self.Element, self.AtomicNumber, self.AtomicWeight, self.AtomicGroup)
+        return feature
+
+
+class EverythingSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Feature
+        model = Everything
         session = db.session
         load_instance = True
