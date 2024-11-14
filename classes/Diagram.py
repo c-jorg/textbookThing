@@ -1,18 +1,18 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double, LargeBinary, PrimaryKeyConstraint
-from . import Base
+#from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double, LargeBinary, PrimaryKeyConstraint
+from . import db, ma
 
-class Diagram(Base):
+class Diagram(db.Model):
     __tablename__ = "FactDiagram"
     
     
-    imageID = Column(Integer, ForeignKey("DimImage.Image_ID"))
-    featureID = Column(Integer, ForeignKey("DimFeatures.Feature_ID"))
-    dateID = Column(Integer, ForeignKey("DimDate.Date_ID"))
-    image = Column("Image", LargeBinary)
-    page = Column("Page", LargeBinary)
+    imageID = db.Column(db.Integer, db.ForeignKey("DimImage.Image_ID"))
+    featureID = db.Column(db.Integer, db.ForeignKey("DimFeatures.Feature_ID"))
+    dateID = db.Column(db.Integer, db.ForeignKey("DimDate.Date_ID"))
+    image = db.Column("Image", db.LargeBinary)
+    page = db.Column("Page", db.LargeBinary)
     
     __table__args__=(
-        PrimaryKeyConstraint(
+        db.PrimaryKeyConstraint(
             imageID, featureID, dateID
         ),
     )
@@ -28,3 +28,9 @@ class Diagram(Base):
     
     def __repr__(self):
         return f" (Image_ID: {self.imageID}, Feature_ID: {self.featureID}, Date_ID: {self.dateID}, Image: [bytearray], Page: [bytearry]) "
+
+class DiagramSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Diagram
+        session = db.session
+        load_instance = True

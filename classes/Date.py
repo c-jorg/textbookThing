@@ -1,13 +1,12 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double
-from flask_marshmallow import Marshmallow 
-from . import Base
+#from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double
+from . import db, ma
 
-class Date(Base):
+class Date(db.Model):
     __tablename__ = "DimDate"
     
-    dateID = Column("Date_ID", Integer, primary_key=True, autoincrement=True)
-    date = Column("Date", Date)
-    year = Column("Year", Integer)
+    dateID = db.Column("Date_ID", db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column("Date", db.Date)
+    year = db.Column("Year", db.Integer)
     
     def __init__(self, date, year):
         
@@ -19,6 +18,8 @@ class Date(Base):
         return f" (Date_ID: {self.dateID}, Date: {self.date}, Year: {self.year}) "
 
 
-class DateSchema(ma.ModelSchema):
+class DateSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Date
+        session = db.session
+        load_instance = True
