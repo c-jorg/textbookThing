@@ -10,17 +10,17 @@ with app.app_context():
     feature = Feature(3, None, None, None, 15)
     image = Image("test", 20.2, 100, 100, "testBook", "1-1-1-1", "test ref", "testSubject", "bar", False)
 
-    jsonDate = {"Date":"2022-01-01","Year":2022}
-    jsonFeature = {"Number_Bars":5,"Axes_Limits":12}
+    jsonDate = {"date":"2022-01-01","year":2022}
+    jsonFeature = {"number_Bars":5,"numberPoints":12}
     jsonImage = {"imageName":"testing","bookTitle":"testing"}
 
     dateSchema = DateSchema(session=db.session)
     featureSchema = FeatureSchema(session=db.session)
     imageSchema = ImageSchema(session=db.session)
 
-    date2 = DateSchema.load(jsonDate)
-    feature2 = FeatureSchema.load(jsonFeature)
-    image2 = ImageSchema.load(jsonImage)
+    date2 = DateSchema().load(jsonDate)
+    feature2 = FeatureSchema().load(jsonFeature)
+    image2 = ImageSchema().load(jsonImage)
 
     db.session.add(date2)
     db.session.add(feature2)

@@ -18,5 +18,6 @@ app = Flask(__name__)
 CORS(app)
 ma = Marshmallow()
 ma.init_app(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:postgres@localhost:5432/textbook_images"
+#app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:postgres@localhost:5432/textbook_images"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///:memory:"
 db = SQLAlchemy(app)
