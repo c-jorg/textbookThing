@@ -1,37 +1,45 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double, Boolean
-from . import Base
+#from sqlalchemy import db.Column, db.String, db.Integer, ForeignKey, Date, Double, Boolean
+from . import db, ma
+#from marshmallow.exceptions import INCLUDE
 
-class Image(Base):
+class Image(db.Model):
     __tablename__ = "DimImage"
     
-    imageID = Column("Image_ID", Integer, primary_key=True, autoincrement=True)
-    imageName = Column("Image_Name", String, nullable=True)
-    fileSizeKB  = Column("File_Size_KB", Double, nullable=True)
-    pixelWidth = Column("Pixel_Width", Integer, nullable=True)
-    pixelHeight = Column("Pixel_Height", Integer, nullable=True)
-    bookTitle = Column("Book_Title", String, nullable=True)
-    isbn  = Column("ISBN", String, nullable=True)
-    ieeeRef = Column("IEEE_Ref", String, nullable=True)
-    subjectName = Column("Subject_Name", String, nullable=True)
-    diagramType = Column("Diagram_Type", String, nullable=True)
-    blackWhite  = Column("Black_White", Boolean, nullable=True)
+    imageID = db.Column("Image_ID", db.Integer, primary_key=True, autoincrement=True)
+    imageName = db.Column("Image_Name", db.String, nullable=True)
+    fileSizeKB  = db.Column("File_Size_KB", db.Double, nullable=True)
+    resolution = db.Column("Resolution", db.String, nullable=True)
+    bookTitle = db.Column("Book_Title", db.String, nullable=True)
+    isbn  = db.Column("ISBN", db.String, nullable=True)
+    ieeeRef = db.Column("IEEE_Ref", db.String, nullable=True)
+    subjectName = db.Column("Subject_Name", db.String, nullable=True)
+    diagramType = db.Column("Diagram_Type", db.String, nullable=True)
+    extension = db.Column("Extenstion", db.String, nullable=True)
+    blackWhite  = db.Column("Black_White", db.Boolean, nullable=True)
     
     
-    def __init__(self, imageName, fileSizeKB, pixelWidth, pixelHeight, bookTitle, isbn, ieeeRef, subjectName, diagramName, blackWhite):
+    def __init__(self, imageName, fileSizeKB, resolution, bookTitle, isbn, ieeeRef, subjectName, diagramName, extension, blackWhite):
         self.imageName = imageName
         self.fileSizeKB = fileSizeKB
-        self.pixelWidth = pixelWidth
-        self.pixelHeight = pixelHeight
+        self.resolution = resolution
         self.bookTitle = bookTitle
         self.isbn = isbn
         self.ieeeRef = ieeeRef
         self.subjectName = subjectName
         self.diagramType = diagramName
+        self.extension = extension
         self.blackWhite = blackWhite
 
         
         
         
     def __repr__(self):
-        return f" (Image_ID: {self.imageID}, Image_Name: {self.imageName}, File_Size_KB: {self.fileSizeKB}, Pixel_Width: {self.pixelWidth}, Pixel_Height: {self.pixelHeight}, Book_Title: {self.bookTitle}, ISBN: {self.isbn}, IEEE_Ref: {self.ieeeRef}, Subject_Name: {self.subjectName}, Diagram_Type: {self.diagramType}, Black_White: {self.blackWhite}) "
+        return f" (Image_ID: {self.imageID}, Image_Name: {self.imageName}, File_Size_KB: {self.fileSizeKB}, resolution: {self.resolution}, Book_Title: {self.bookTitle}, ISBN: {self.isbn}, IEEE_Ref: {self.ieeeRef}, Subject_Name: {self.subjectName}, Diagram_Type: {self.diagramType}, Black_White: {self.blackWhite}) "
     
+class ImageSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Image
+        session = db.session
+        load_instance = True
+        #allows nulls
+        unknown = 'include'
