@@ -15,9 +15,15 @@ from flask_marshmallow import Marshmallow
 
 
 app = Flask(__name__)
+#app2 = Flask(__name__)
+#CORS(app2)
 CORS(app)
 ma = Marshmallow()
+#ma2 = Marshmallow()
+#ma2.init_app(app2)
 ma.init_app(app)
-#app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:postgres@localhost:5432/textbook_images"
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///:memory:"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:postgres@localhost:5432/textbook_images"
+#app2.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:postgres@localhost:5432/image"
+#app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///:memory:"
 db = SQLAlchemy(app)
+#dbb = SQLAlchemy(app2)

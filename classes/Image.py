@@ -1,5 +1,6 @@
 #from sqlalchemy import db.Column, db.String, db.Integer, ForeignKey, Date, Double, Boolean
 from . import db, ma
+#from marshmallow.exceptions import INCLUDE
 
 class Image(db.Model):
     __tablename__ = "DimImage"
@@ -17,7 +18,7 @@ class Image(db.Model):
     blackWhite  = db.Column("Black_White", db.Boolean, nullable=True)
     
     
-    def __init__(self, imageName, fileSizeKB, resolution, bookTitle, isbn, ieeeRef, subjectName, diagramName, extenstion, blackWhite):
+    def __init__(self, imageName, fileSizeKB, resolution, bookTitle, isbn, ieeeRef, subjectName, diagramName, extension, blackWhite):
         self.imageName = imageName
         self.fileSizeKB = fileSizeKB
         self.resolution = resolution
@@ -33,10 +34,12 @@ class Image(db.Model):
         
         
     def __repr__(self):
-        return f" (Image_ID: {self.imageID}, Image_Name: {self.imageName}, File_Size_KB: {self.fileSizeKB}, Pixel_Width: {self.pixelWidth}, Pixel_Height: {self.pixelHeight}, Book_Title: {self.bookTitle}, ISBN: {self.isbn}, IEEE_Ref: {self.ieeeRef}, Subject_Name: {self.subjectName}, Diagram_Type: {self.diagramType}, Black_White: {self.blackWhite}) "
+        return f" (Image_ID: {self.imageID}, Image_Name: {self.imageName}, File_Size_KB: {self.fileSizeKB}, resolution: {self.resolution}, Book_Title: {self.bookTitle}, ISBN: {self.isbn}, IEEE_Ref: {self.ieeeRef}, Subject_Name: {self.subjectName}, Diagram_Type: {self.diagramType}, Black_White: {self.blackWhite}) "
     
 class ImageSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Image
         session = db.session
         load_instance = True
+        #allows nulls
+        unknown = 'include'

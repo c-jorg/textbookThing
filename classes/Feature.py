@@ -1,5 +1,6 @@
 #from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double, LargeBinary, PrimaryKeyConstraint
 from . import db, ma
+#from marshmallow.exceptions import INCLUDE
 
 class Feature(db.Model):
     __tablename__ = "DimFeature"
@@ -87,10 +88,12 @@ class Feature(db.Model):
         
     
     def __repr__(self):
-        return f" (Image_ID: {self.imageID}, Feature_ID: {self.featureID}, Date_ID: {self.dateID}, Image: [bytearray], Page: [bytearry]) "
+        return f" (Feature_ID: {self.featureID}, GraphType {self.GraphType}, etc)"
 
 class FeatureSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Feature
         session = db.session
         load_instance = True
+        #allows nulls
+        unknown = 'include'

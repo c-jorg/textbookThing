@@ -4,3 +4,5 @@ Flask-SQLAlchemy
 Flask-CORS
 flask-marshmallow
 marshmallow-SQLAlchemy
+b64
+cached_properties
