@@ -3,6 +3,7 @@ import base64
 from datetime import datetime
 
 with app.app_context():
+    
     db.create_all()
 
     everythingSchema = EverythingSchema(session=db.session)
@@ -28,5 +29,19 @@ with app.app_context():
     for everything in results:
         image = everything.makeImage()
         feature = everything.makeFeature()
-        print(image)
-        print(feature)
+        # print(image)
+        # print(feature)
+
+        db.session.add(image)
+        db.session.add(feature)
+        db.session.commit()
+        # print(image)
+        # print(feature)
+
+        fact = Diagram(image.imageID, feature.featureID, date.dateID, everything.Extracted_image, everything.Full_page_image)
+        db.session.add(fact)
+        db.session.commit()
+        # print(fact)
+        # print(fact.image)
+
+    print("Done")
