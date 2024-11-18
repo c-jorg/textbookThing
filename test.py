@@ -38,8 +38,10 @@ with app.app_context():
         "Full_page_image":base64.b64encode(byteArray).decode('utf-8'),
         "GraphType":"bar",
         "NumBars":"5",
-        "NumPoints":"No Data"
+        "NumPoints":"No Data",
+        "NumSlices":None
     }
+    print(jsonEverything)
     jsonEverything = Everything.replaceNoData(jsonEverything)
 
     db.session.add(everythingSchema.load(jsonEverything, partial=True))
