@@ -13,12 +13,13 @@ class Image(db.Model):
     isbn  = db.Column("ISBN", db.String, nullable=True)
     ieeeRef = db.Column("IEEE_Ref", db.String, nullable=True)
     subjectName = db.Column("Subject_Name", db.String, nullable=True)
+    subtopic = db.Column("Subtopic", db.String, nullable=True)
     diagramType = db.Column("Diagram_Type", db.String, nullable=True)
     extension = db.Column("Extenstion", db.String, nullable=True)
     blackWhite  = db.Column("Black_White", db.Boolean, nullable=True)
     
     
-    def __init__(self, imageName, fileSizeKB, resolution, bookTitle, isbn, ieeeRef, subjectName, diagramName, extension, blackWhite):
+    def __init__(self, imageName, fileSizeKB, resolution, bookTitle, isbn, ieeeRef, subjectName, subtopic, diagramName, extension, blackWhite):
         self.imageName = imageName
         self.fileSizeKB = fileSizeKB
         self.resolution = resolution
@@ -26,6 +27,7 @@ class Image(db.Model):
         self.isbn = isbn
         self.ieeeRef = ieeeRef
         self.subjectName = subjectName
+        self.subtopic = subtopic
         self.diagramType = diagramName
         self.extension = extension
         self.blackWhite = blackWhite
@@ -34,7 +36,7 @@ class Image(db.Model):
         
         
     def __repr__(self):
-        return f" (Image_ID: {self.imageID}, Image_Name: {self.imageName}, File_Size_KB: {self.fileSizeKB}, resolution: {self.resolution}, Book_Title: {self.bookTitle}, ISBN: {self.isbn}, IEEE_Ref: {self.ieeeRef}, Subject_Name: {self.subjectName}, Diagram_Type: {self.diagramType}, Black_White: {self.blackWhite}) "
+        return f" (Image_ID: {self.imageID}, Image_Name: {self.imageName}, File_Size_KB: {self.fileSizeKB}, resolution: {self.resolution}, Book_Title: {self.bookTitle}, ISBN: {self.isbn}, IEEE_Ref: {self.ieeeRef}, Subject_Name: {self.subjectName}, subtopic: {self.subtopic}, Diagram_Type: {self.diagramType}, Black_White: {self.blackWhite}) "
     
 class ImageSchema(ma.SQLAlchemyAutoSchema):
     class Meta:

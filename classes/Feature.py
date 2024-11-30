@@ -1,6 +1,5 @@
 #from sqlalchemy import Column, String, Integer, ForeignKey, Date, Double, LargeBinary, PrimaryKeyConstraint
 from . import db, ma
-#from marshmallow.exceptions import INCLUDE
 
 class Feature(db.Model):
     __tablename__ = "DimFeature"
@@ -13,7 +12,10 @@ class Feature(db.Model):
     CategoryLabel = db.Column("Category_Label", db.String, nullable=True)
     ProportionLabel = db.Column("Proportion_Label", db.String, nullable=True)
     AxisX = db.Column("Axis_X", db.String, nullable=True)
+    AxisXMin = db.Column("Axis_X_Min", db.String, nullable=True)
+    AxisXMax = db.Column("Axis_X_Max", db.String, nullable=True)
     AxisY = db.Column("Axis_Y", db.String, nullable=True)
+    GeometricShape = db.Column("Geometric_Shape", db.String, nullable=True)
     NumAtoms = db.Column("Num_Atoms", db.String, nullable=True)
     CellType = db.Column("Cell_Type", db.String, nullable=True)
     StructureCount = db.Column("Structure_Count", db.String, nullable=True)
@@ -46,7 +48,10 @@ class Feature(db.Model):
     AtomicGroup = db.Column("Atomic_Group", db.String, nullable=True)
 
 
-    def __init__(self, GraphType, NumBars, NumPoints, NumSlices, CategoryLabel, ProportionLabel, AxisX, AxisY, NumAtoms, CellType, StructureCount, MagnificationLevel, StainType, Organ, Layers, MeasurementUnits, Size, Species, PopulationDensity, Habitat, Sequence, Structure, BasePairs, Molecule, BondType, Angle, FunctionalGroups, Reactants, Products, Temperature, ReactionType, Equipment, LiquidVolume, SafetyLabel, Element, AtomicNumber, AtomicWeight, AtomicGroup, ):
+    def __init__(self, GraphType, NumBars, NumPoints, NumSlices, CategoryLabel, ProportionLabel, AxisX, AxisXMin, AxisXMax, AxisY, GeometriShape, NumAtoms, CellType, StructureCount, MagnificationLevel, StainType, Organ, Layers, MeasurementUnits, Size, Species, PopulationDensity, Habitat, Sequence, Structure, BasePairs, Molecule, BondType, Angle, FunctionalGroups, Reactants, Products, Temperature, ReactionType, Equipment, LiquidVolume, SafetyLabel, Element, AtomicNumber, AtomicWeight, AtomicGroup):
+        self.AxisXMax = AxisXMax
+        self.AxisXMin = AxisXMin
+        self.GeometricShape = GeometricShape
         self.GraphType = GraphType
         self.NumBars = NumBars
         self.NumPoints = NumPoints
@@ -88,12 +93,10 @@ class Feature(db.Model):
         
     
     def __repr__(self):
-        return f" (Feature_ID: {self.featureID}, GraphType {self.GraphType}, etc)"
+        return f" (Image_ID: {self.imageID}, Feature_ID: {self.featureID}, Date_ID: {self.dateID}, Image: [bytearray], Page: [bytearry]) "
 
 class FeatureSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Feature
         session = db.session
         load_instance = True
-        #allows nulls
-        unknown = 'include'
