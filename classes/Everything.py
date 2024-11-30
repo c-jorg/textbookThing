@@ -15,7 +15,7 @@ class Everything(db.Model):
     IsBW = db.Column("isbw", db.String, nullable=True)
     Ext = db.Column("ext", db.String, nullable=True)
     Subject = db.Column("subject", db.String, nullable=True)
-    Subtopic = db.Column('subtopic', db.string, nullable=True)
+    Subtopic = db.Column('subtopic', db.String, nullable=True)
     #fact table
     Extracted_image = db.Column("extracted_image", db.LargeBinary, nullable=True)
     Full_page_image = db.Column("full_page_image", db.LargeBinary, nullable=True)
