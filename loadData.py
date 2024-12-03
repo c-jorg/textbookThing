@@ -3,7 +3,7 @@ import base64
 from datetime import datetime
 
 with app.app_context():
-    
+
     db.create_all()
 
     everythingSchema = EverythingSchema(session=db.session)
@@ -27,6 +27,8 @@ with app.app_context():
 
     results = db.session.query(Everything).all()
     for everything in results:
+        #everything = Everything.replaceNoData(everythingSchema.dump(everything))
+        #print(everything)
         image = everything.makeImage()
         feature = everything.makeFeature()
         # print(image)

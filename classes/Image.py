@@ -7,7 +7,7 @@ class Image(db.Model):
     
     imageID = db.Column("Image_ID", db.Integer, primary_key=True, autoincrement=True)
     imageName = db.Column("Image_Name", db.String, nullable=True)
-    fileSizeKB  = db.Column("File_Size_KB", db.Double, nullable=True)
+    fileSizeKB  = db.Column("File_Size_KB", db.String, nullable=True)
     resolution = db.Column("Resolution", db.String, nullable=True)
     bookTitle = db.Column("Book_Title", db.String, nullable=True)
     isbn  = db.Column("ISBN", db.String, nullable=True)
@@ -15,7 +15,7 @@ class Image(db.Model):
     subjectName = db.Column("Subject_Name", db.String, nullable=True)
     diagramType = db.Column("Diagram_Type", db.String, nullable=True)
     extension = db.Column("Extenstion", db.String, nullable=True)
-    blackWhite  = db.Column("Black_White", db.Boolean, nullable=True)
+    blackWhite  = db.Column("Black_White", db.String, nullable=True)
     
     
     def __init__(self, imageName, fileSizeKB, resolution, bookTitle, isbn, ieeeRef, subjectName, diagramName, extension, blackWhite):

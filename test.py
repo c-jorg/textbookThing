@@ -38,8 +38,10 @@ with app.app_context():
         "Full_page_image":base64.b64encode(byteArray).decode('utf-8'),
         "GraphType":"bar",
         "NumBars":"5",
-        "NumPoints":"No Data"
+        "NumPoints":"No Data",
+        "NumSlices":None
     }
+    print(jsonEverything)
     jsonEverything = Everything.replaceNoData(jsonEverything)
 
     db.session.add(everythingSchema.load(jsonEverything, partial=True))
@@ -64,11 +66,23 @@ with app.app_context():
         db.session.add(fact)
         db.session.commit()
 
+    print('Facts')
     results = db.session.query(Diagram).all()
     for result in results:
         #print(factSchema.load(results))
         print(result)
 
+    print('Features')
+    results = db.session.query(Feature).all()
+    for result in results:
+        print(result)
+
+    print('Images')
+    results = db.session.query(Image).all()
+    for result in results:
+        print(result)
+
+    print('Dates')
     #print(datetime.today().strftime('%Y-%m-%d'))
     today =datetime.today().strftime('%Y-%m-%d')
     results = db.session.query(Date).filter(Date.date == today).all()
