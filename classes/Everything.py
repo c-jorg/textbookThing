@@ -5,7 +5,7 @@ from marshmallow import fields, post_load, pre_dump
 import base64, json
 
 class Everything(db.Model):
-    __tablename__ = "image_metadata"
+    __tablename__ = "image_metadata2"
     
     ID = db.Column("id", db.Integer, primary_key=True, autoincrement=True)
     #image table
