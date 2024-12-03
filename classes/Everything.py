@@ -15,6 +15,7 @@ class Everything(db.Model):
     IsBW = db.Column("isbw", db.String, nullable=True)
     Ext = db.Column("ext", db.String, nullable=True)
     Subject = db.Column("subject", db.String, nullable=True)
+    Subtopic = db.Column("subtopic", db.String, nullable=True)
     #fact table
     Extracted_image = db.Column("extracted_image", db.LargeBinary, nullable=True)
     Full_page_image = db.Column("full_page_image", db.LargeBinary, nullable=True)
@@ -26,7 +27,10 @@ class Everything(db.Model):
     CategoryLabel = db.Column("categorylabel", db.String, nullable=True)
     ProportionLabel = db.Column("proportionlabel", db.String, nullable=True)
     AxisX = db.Column("axisx", db.String, nullable=True)
+    AxisX_min = db.Column("axisx_min", db.String, nullable=True)
+    AxisX_max = db.Column("axisx_max", db.String, nullable=True)
     AxisY = db.Column("axisy", db.String, nullable=True)
+    GeometricShape = db.Column("geometric_shape", db.String, nullable=True)
     NumAtoms = db.Column("numatoms", db.String, nullable=True)
     CellType = db.Column("celltype", db.String, nullable=True)
     StructureCount = db.Column("structurecount", db.String, nullable=True)
@@ -59,7 +63,11 @@ class Everything(db.Model):
     AtomicGroup = db.Column("atomicgroup", db.String, nullable=True)
     
     
-    def __init__(self, Image_name=None, Resolution=None, Bytes_size=None, IsBW=None, Ext=None, Extracted_image=None, Full_page_image=None, Subject=None, GraphType=None, NumBars=None, NumPoints=None, NumSlices=None, CategoryLabel=None, ProportionLabel=None, AxisX=None, AxisY=None, NumAtoms=None, CellType=None, StructureCount=None, MagnificationLevel=None, StainType=None, Organ=None, Layers=None, MeasurementUnits=None, Size=None, Species=None, PopulationDensity=None, Habitat=None, Sequence=None, Structure=None, BasePairs=None, Molecule=None, BondType=None, Angle=None, FunctionalGroups=None, Reactants=None, Products=None, Temperature=None, ReactionType=None, Equipment=None, LiquidVolume=None, SafetyLabel=None, Element=None, AtomicNumber=None, AtomicWeight=None, AtomicGroup=None):
+    def __init__(self, Image_name=None, Resolution=None, Bytes_size=None, IsBW=None, Ext=None, Extracted_image=None, Full_page_image=None, Subject=None, Subtopic=None, GraphType=None, NumBars=None, NumPoints=None, NumSlices=None, CategoryLabel=None, ProportionLabel=None, AxisX=None, AxisX_min=None, AxisX_max=None, AxisY=None, GeometricShape=None, NumAtoms=None, CellType=None, StructureCount=None, MagnificationLevel=None, StainType=None, Organ=None, Layers=None, MeasurementUnits=None, Size=None, Species=None, PopulationDensity=None, Habitat=None, Sequence=None, Structure=None, BasePairs=None, Molecule=None, BondType=None, Angle=None, FunctionalGroups=None, Reactants=None, Products=None, Temperature=None, ReactionType=None, Equipment=None, LiquidVolume=None, SafetyLabel=None, Element=None, AtomicNumber=None, AtomicWeight=None, AtomicGroup=None):
+        self.AxisX_min = AxisX_min
+        self.AxisX_max = AxisX_max
+        self.Subtopic = Subtopic
+        self.GeometricShape = GeometricShape
         self.Image_name = Image_name
         self.Resolution = Resolution
         self.Bytes_size = Bytes_size
@@ -112,11 +120,11 @@ class Everything(db.Model):
         return f" (GraphType: {self.GraphType} Number_Bars: {self.NumBars}, Number_Points: {self.NumPoints}, Number_Slices: {self.NumSlices}, Number_Atoms: {self.NumAtoms}) "
 
     def makeImage(self):
-        image = Image(self.Image_name, self.Bytes_size, self.Resolution, None, None, None, self.Subject, None, self.Ext, self.IsBW)
+        image = Image(self.Image_name, self.Bytes_size, self.Resolution, None, None, None, self.Subject, self.Subtopic, None, self.Ext, self.IsBW)
         return image
 
     def makeFeature(self):
-        feature = Feature(self.GraphType, self.NumBars, self.NumPoints, self.NumSlices, self.CategoryLabel, self.ProportionLabel, self.AxisX, self.AxisY, self.NumAtoms, self.CellType, self.StructureCount, self.MagnificationLevel, self.StainType, self.Organ, self.Layers, self.MeasurementUnits, self.Size, self.Species, self.PopulationDensity, self.Habitat, self.Sequence, self.Structure, self.BasePairs, self.Molecule, self.BondType, self.Angle, self.FunctionalGroups, self.Reactants, self.Products, self.Temperature, self.ReactionType, self.Equipment, self.LiquidVolume, self.SafetyLabel, self.Element, self.AtomicNumber, self.AtomicWeight, self.AtomicGroup)
+        feature = Feature(self.GraphType, self.NumBars, self.NumPoints, self.NumSlices, self.CategoryLabel, self.ProportionLabel, self.AxisX, self.AxisX_min, self.AxisX_max, self.AxisY, self.GeometricShape, self.NumAtoms, self.CellType, self.StructureCount, self.MagnificationLevel, self.StainType, self.Organ, self.Layers, self.MeasurementUnits, self.Size, self.Species, self.PopulationDensity, self.Habitat, self.Sequence, self.Structure, self.BasePairs, self.Molecule, self.BondType, self.Angle, self.FunctionalGroups, self.Reactants, self.Products, self.Temperature, self.ReactionType, self.Equipment, self.LiquidVolume, self.SafetyLabel, self.Element, self.AtomicNumber, self.AtomicWeight, self.AtomicGroup)
         return feature
 
     @staticmethod

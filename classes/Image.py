@@ -13,12 +13,13 @@ class Image(db.Model):
     isbn  = db.Column("ISBN", db.String, nullable=True)
     ieeeRef = db.Column("IEEE_Ref", db.String, nullable=True)
     subjectName = db.Column("Subject_Name", db.String, nullable=True)
+    subtopic = db.Column("Subtopic", db.String, nullable=True)
     diagramType = db.Column("Diagram_Type", db.String, nullable=True)
     extension = db.Column("Extenstion", db.String, nullable=True)
     blackWhite  = db.Column("Black_White", db.String, nullable=True)
     
     
-    def __init__(self, imageName, fileSizeKB, resolution, bookTitle, isbn, ieeeRef, subjectName, diagramName, extension, blackWhite):
+    def __init__(self, imageName, fileSizeKB, resolution, bookTitle, isbn, ieeeRef, subjectName, subtopic, diagramName, extension, blackWhite):
         self.imageName = imageName
         self.fileSizeKB = fileSizeKB
         self.resolution = resolution
@@ -26,6 +27,7 @@ class Image(db.Model):
         self.isbn = isbn
         self.ieeeRef = ieeeRef
         self.subjectName = subjectName
+        self.subtopic = subtopic
         self.diagramType = diagramName
         self.extension = extension
         self.blackWhite = blackWhite
